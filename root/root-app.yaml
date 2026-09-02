@@ -9,9 +9,9 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/mkhalid-7/n8n-k8s-alibaba.git
+    repoURL: https://github.com/Tahira-Nawaz/Argocd-apps.git
     targetRevision: main
-    path: kubernetes/applications
+    path: applications
     directory:
       recurse: true
       include: '**/*app.yaml'
