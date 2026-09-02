@@ -1,0 +1,11 @@
+```yaml
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: "1.27"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+```
