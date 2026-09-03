@@ -12,7 +12,7 @@ spec:
   sources:
     - repoURL: https://helm.nginx.com/stable
       chart: nginx
-      targetRevision: 2.2.2
+      targetRevision: 0.20.1
       helm:
         releaseName: nginx
         valueFiles:
