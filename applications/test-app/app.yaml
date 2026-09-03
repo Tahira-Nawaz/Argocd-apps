@@ -1,31 +1,38 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: test-app
-  namespace: argocd
+  name: nginx-test
 spec:
-  project: default
-
-  sources:
-    - repoURL: https://github.com/Tahira-Nawaz/Argocd-apps.git
-      targetRevision: main
-      path: applications/test-app
-      helm:
-        releaseName: test-app
-        valueFiles:
-          - $values/applications/test-app/values.yaml
-
-    - repoURL: https://github.com/Tahira-Nawaz/Argocd-apps.git
-      targetRevision: main
-      ref: values
-
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: test-app
-
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-test
+  template:
+    metadata:
+      labels:
+        app: nginx-test
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-test
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx-test
+  ports:
+    - port: 80
+      targetPort: 80
