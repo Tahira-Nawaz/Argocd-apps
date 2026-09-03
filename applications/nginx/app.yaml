@@ -11,8 +11,8 @@ spec:
 
   sources:
     - repoURL: https://helm.nginx.com/stable
-      chart: nginx
-      targetRevision: 8.6.4
+      chart: nginx-ingress
+      targetRevision: 2.5.2
       helm:
         releaseName: nginx
         valueFiles:
